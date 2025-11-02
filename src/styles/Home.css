@@ -1,0 +1,71 @@
+.home h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Conteneur du tableau avec scroll horizontal sur mobile */
+.table-container {
+  overflow-x: auto;
+  border-radius: 8px;
+  box-shadow: 0px 3px 10px rgba(0,0,0,0.1);
+  background-color: white;
+}
+
+/* Tableau principal */
+.book-list {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 500px; /* pour scroll horizontal si écran trop petit */
+}
+
+.book-list th, .book-list td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.book-list th {
+  background-color: #4a90e2;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* Lignes alternées et hover */
+.book-list tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.book-list tr:hover {
+  background-color: #e1f0ff;
+  transform: scale(1.01);
+  transition: 0.2s;
+}
+
+/* Total */
+.home-total {
+  text-align: right;
+  font-weight: bold;
+  font-size: 18px;
+  color: #4a90e2;
+  margin-top: 10px;
+}
+
+/* Barre de recherche et tri */
+.home-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
+.home-controls input,
+.home-controls select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
