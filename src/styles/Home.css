@@ -42,84 +42,22 @@
   outline: none;
 }
 
-/* Couleur de fond et du texte quand la liste est ouverte (pour Chrome, Edge, Safari) */
 .mois-dropdown select option {
   background: #1a1a1a;
   color: #EAEAEA;
 }
 
-/* Survol */
 .mois-dropdown select:hover {
   border-color: #6C63FF;
   box-shadow: 0 0 10px rgba(108, 99, 255, 0.4);
 }
 
-/* Quand c’est focus (sélectionné) */
 .mois-dropdown select:focus {
   border-color: #FFD369;
   box-shadow: 0 0 10px rgba(255, 211, 105, 0.5);
 }
 
-
-.mois-dropdown select:hover {
-  border-color: #6C63FF;
-  box-shadow: 0 0 10px rgba(108, 99, 255, 0.4);
-}
-
-/* --- Liste d'achats --- */
-.achats-list {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.livre-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(8px);
-  border-radius: 15px;
-  padding: 1.5rem;
-  width: 250px;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
-}
-
-.livre-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 20px rgba(108, 99, 255, 0.6);
-}
-
-.livre-card h2 {
-  margin: 0;
-  font-size: 1.3rem;
-}
-
-.livre-card p {
-  margin-top: 0.5rem;
-  color: #FFD369;
-  font-weight: 600;
-}
-
-/* --- Aucun achat --- */
-.no-data {
-  color: #B5B5B5;
-  font-style: italic;
-  margin-top: 2rem;
-}
-
-/* --- Total --- */
-.total-container {
-  margin-top: 1rem;
-  font-size: 1.3rem;
-  color: #EAEAEA;
-}
-
-.total-container span {
-  color: #FFD369;
-  font-weight: 700;
-}
-
+/* --- Tableau des livres --- */
 .book-table {
   width: 80%;
   margin: 2rem auto;
@@ -143,6 +81,11 @@
 .book-table td {
   padding: 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.book-table tr:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  transition: background 0.3s ease;
 }
 
 /* Animation fade + slide */
@@ -206,21 +149,47 @@
   transform: rotate(45deg);
 }
 
-.book-table tr:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  transition: background 0.3s ease;
+/* --- Bouton Supprimer --- */
+.delete-btn {
+  background: linear-gradient(90deg, #ff4b4b, #d63031);
+  border: none;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.total {
+.delete-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 10px rgba(255, 75, 75, 0.5);
+  background: linear-gradient(90deg, #ff7676, #e84141);
+}
+
+/* --- Totaux --- */
+.totals-container {
+  margin-top: 2rem;
   text-align: right;
   margin-right: 10%;
-  color: #FFD369;
-  font-weight: 600;
   font-size: 1.2rem;
-  margin-top: 1rem;
+  line-height: 1.8rem;
+  color: #EAEAEA;
 }
 
+.totals-container p {
+  margin: 0.3rem 0;
+}
 
+.totals-container .total-fixe {
+  color: #6C63FF;
+  font-weight: 700;
+}
+
+.totals-container .total-restant {
+  color: #FFD369;
+  font-weight: 700;
+}
 
 @keyframes fadeIn {
   from {
@@ -232,3 +201,4 @@
     transform: translateY(0);
   }
 }
+

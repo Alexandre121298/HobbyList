@@ -1,52 +1,173 @@
 .achats-container {
   text-align: center;
+  padding: 50px 20px;
+  animation: fadeIn 1s ease;
 }
 
 .achats-title {
-  font-size: 2.5rem;
+  font-size: 2.4rem;
+  margin-bottom: 2rem;
   background: linear-gradient(90deg, #6C63FF, #FFD369);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 2rem;
 }
 
-.achats-list {
+/* --- Formulaire --- */
+/* +++ base safe box-model pour le formulaire +++ */
+.ajout-form,
+.ajout-form * {
+  box-sizing: border-box;
+}
+
+/* conteneur du formulaire (toujours centré et padded) */
+.ajout-form {
+  background: rgba(30, 30, 30, 0.9);
+  width: 500px;            /* largeur fixe agréable */
+  max-width: 95%;          /* responsive sur petit écran */
+  margin: 0 auto;
+  padding: 2rem;           /* espace intérieur pour éviter que les éléments collent */
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
-.livre-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(6px);
-  border-radius: 12px;
-  padding: 1.5rem;
-  width: 250px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
-  transition: all 0.3s ease;
+/* formulaire : alignement cohérent des labels + inputs */
+.form-group {
+  text-align: left;
+  color: #EAEAEA;
 }
 
-.livre-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 20px rgba(108, 99, 255, 0.6);
+/* label */
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #B5B5B5;
 }
 
-.add-button {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  background: linear-gradient(135deg, #6C63FF, #FFD369);
-  color: #0E0E10;
+/* --- Ligne regroupant Mois + Année --- */
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.form-row .half {
+  flex: 1;
+}
+
+/* S'assure que les deux selects ont le même style que les inputs */
+.form-row select {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background-color: rgba(40, 40, 40, 0.95);
+  color: #EAEAEA;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.25s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.form-row select:focus {
+  border-color: #6C63FF;
+  box-shadow: 0 0 8px rgba(108,99,255,0.18);
+}
+
+.form-row option {
+  background-color: #1a1a1a;
+  color: #EAEAEA;
+}
+
+/* Responsive : Mois et Année passent en colonne sur petit écran */
+@media (max-width: 500px) {
+  .form-row {
+    flex-direction: column;
+  }
+}
+
+/* input : prend exactement la largeur disponible (padding inclus) */
+.ajout-form input[type="text"],
+.ajout-form input[type="number"],
+.ajout-form textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background-color: rgba(40, 40, 40, 0.95);
+  color: #EAEAEA;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+/* focus visible + lueur */
+.ajout-form input:focus,
+.ajout-form textarea:focus,
+.ajout-form select:focus {
+  border-color: #6C63FF;
+  box-shadow: 0 0 8px rgba(108,99,255,0.18);
+}
+
+/* Style du champ <select> */
+.ajout-form select {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background-color: rgba(40, 40, 40, 0.95);
+  color: #EAEAEA;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.25s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.ajout-form option {
+  background-color: #1a1a1a;
+  color: #EAEAEA;
+}
+
+
+/* bouton valider : alignement et largeur */
+.submit-btn {
+  width: 100%;
+  background: linear-gradient(90deg, #6C63FF, #FFD369);
+  color: #1a1a1a;
   border: none;
-  border-radius: 50%;
-  font-size: 2rem;
-  width: 60px;
-  height: 60px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: transform 0.3s;
+  transition: all 0.25s ease;
+  align-self: stretch;
+  min-width: 120px;
 }
 
-.add-button:hover {
-  transform: scale(1.1);
+.submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(108,99,255,0.12);
+}
+
+/* --- Animation douce --- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

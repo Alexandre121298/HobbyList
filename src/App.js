@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="app-container">
       <nav className="navbar">
-        <h1 className="logo">BookFlow</h1>
+        <h1 className="logo">HobbyList</h1>
         <div className="nav-links">
           <Link to="/">Accueil</Link>
           <Link to="/achats">Achats</Link>
