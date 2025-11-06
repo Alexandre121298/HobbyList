@@ -1,72 +1,80 @@
-import React, { useState } from 'react';
-import MonthSelector from './MonthSelector';
-import '../styles/Home.css';
+import React, { useState } from "react";
+import "../styles/Home.css";
 
-function Home({ books }) {
-  const [selectedMonth, setSelectedMonth] = useState('Novembre 2025');
-  const [searchTerm, setSearchTerm] = useState('');
-  const [sortKey, setSortKey] = useState('title'); // 'title' ou 'price'
+const Home = () => {
+  const [selectedMonth, setSelectedMonth] = useState("Novembre 2025");
+  const [books, setBooks] = useState([
+    { id: 1, title: "Dune", price: 18.5, bought: false },
+    { id: 2, title: "Neuromancien", price: 14.99, bought: false },
+    { id: 3, title: "Fondation", price: 19.99, bought: false },
+  ]);
 
-  const filteredBooks = books
-    .filter(book => book.month === selectedMonth)
-    .filter(book => book.title.toLowerCase().includes(searchTerm.toLowerCase()))
-    .sort((a, b) => {
-      if(sortKey === 'title') return a.title.localeCompare(b.title);
-      if(sortKey === 'price') return a.price - b.price;
-      return 0;
-    });
+  const handleCheckbox = (id) => {
+    setBooks(
+      books.map((book) =>
+        book.id === id ? { ...book, bought: !book.bought } : book
+      )
+    );
+  };
 
-  const total = filteredBooks.reduce((sum, book) => sum + book.price, 0);
+  const months = [
+    "Janvier 2025", "Février 2025", "Mars 2025", "Avril 2025",
+    "Mai 2025", "Juin 2025", "Juillet 2025", "Août 2025",
+    "Septembre 2025", "Octobre 2025", "Novembre 2025", "Décembre 2025"
+  ];
+
+  const total = books.reduce((sum, book) => sum + book.price, 0);
 
   return (
-    <div className="home">
-      <h1>Mes livres</h1>
+    <div className="home-container">
+      <h1 className="home-title">Mes achats de livres</h1>
 
-      <MonthSelector selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />
-
-      <div className="home-controls">
-        <input
-          type="text"
-          placeholder="Rechercher un livre..."
-          value={searchTerm}
-          onChange={e => setSearchTerm(e.target.value)}
-        />
-        <select value={sortKey} onChange={e => setSortKey(e.target.value)}>
-          <option value="title">Trier par titre</option>
-          <option value="price">Trier par prix</option>
+      <div className="mois-dropdown">
+        <label>Sélectionnez un mois :</label>
+        <select
+          value={selectedMonth}
+          onChange={(e) => setSelectedMonth(e.target.value)}
+        >
+          {months.map((m) => (
+            <option key={m} value={m}>{m}</option>
+          ))}
         </select>
       </div>
 
-      <div className="table-container">
-        <table className="book-list">
-          <thead>
-            <tr>
-              <th>Titre</th>
-              <th>Prix (€)</th>
-              <th>Mois</th>
+      <table className="book-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>TITRE</th>
+            <th>PRIX (€)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {books.map((book) => (
+            <tr
+              key={book.id}
+              className={`book-row ${book.bought ? "bought fade-slide" : "fade-slide"}`}
+            >
+              <td>
+                <label className="checkbox-container">
+                  <input
+                    type="checkbox"
+                    checked={book.bought}
+                    onChange={() => handleCheckbox(book.id)}
+                  />
+                  <span className="checkmark"></span>
+                </label>
+              </td>
+              <td>{book.title}</td>
+              <td>{book.price.toFixed(2)}</td>
             </tr>
-          </thead>
-          <tbody>
-            {filteredBooks.length === 0 ? (
-              <tr>
-                <td colSpan="3">Aucun livre trouvé.</td>
-              </tr>
-            ) : (
-              filteredBooks.map(book => (
-                <tr key={book.id}>
-                  <td>{book.title}</td>
-                  <td>{book.price.toFixed(2)}</td>
-                  <td>{book.month}</td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
 
-      <div className="home-total">Total : {total.toFixed(2)} €</div>
+      <p className="total">Total pour {selectedMonth} : {total.toFixed(2)} €</p>
     </div>
   );
-}
+};
 
 export default Home;

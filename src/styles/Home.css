@@ -1,71 +1,234 @@
-.home h1 {
+.home-container {
   text-align: center;
-  margin-bottom: 20px;
-  color: #333;
+  animation: fadeIn 1.2s ease-in;
 }
 
-/* Conteneur du tableau avec scroll horizontal sur mobile */
-.table-container {
-  overflow-x: auto;
-  border-radius: 8px;
-  box-shadow: 0px 3px 10px rgba(0,0,0,0.1);
-  background-color: white;
+.home-title {
+  font-size: 2.6rem;
+  margin-bottom: 2rem;
+  background: linear-gradient(90deg, #6C63FF, #FFD369);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-/* Tableau principal */
-.book-list {
-  width: 100%;
+/* --- Sélecteur de mois --- */
+.mois-dropdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.mois-dropdown label {
+  color: #B5B5B5;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.mois-dropdown select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background: rgba(40, 40, 40, 0.9);
+  color: #EAEAEA;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  font-family: 'Quicksand', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+/* Couleur de fond et du texte quand la liste est ouverte (pour Chrome, Edge, Safari) */
+.mois-dropdown select option {
+  background: #1a1a1a;
+  color: #EAEAEA;
+}
+
+/* Survol */
+.mois-dropdown select:hover {
+  border-color: #6C63FF;
+  box-shadow: 0 0 10px rgba(108, 99, 255, 0.4);
+}
+
+/* Quand c’est focus (sélectionné) */
+.mois-dropdown select:focus {
+  border-color: #FFD369;
+  box-shadow: 0 0 10px rgba(255, 211, 105, 0.5);
+}
+
+
+.mois-dropdown select:hover {
+  border-color: #6C63FF;
+  box-shadow: 0 0 10px rgba(108, 99, 255, 0.4);
+}
+
+/* --- Liste d'achats --- */
+.achats-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.livre-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  border-radius: 15px;
+  padding: 1.5rem;
+  width: 250px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+}
+
+.livre-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(108, 99, 255, 0.6);
+}
+
+.livre-card h2 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.livre-card p {
+  margin-top: 0.5rem;
+  color: #FFD369;
+  font-weight: 600;
+}
+
+/* --- Aucun achat --- */
+.no-data {
+  color: #B5B5B5;
+  font-style: italic;
+  margin-top: 2rem;
+}
+
+/* --- Total --- */
+.total-container {
+  margin-top: 1rem;
+  font-size: 1.3rem;
+  color: #EAEAEA;
+}
+
+.total-container span {
+  color: #FFD369;
+  font-weight: 700;
+}
+
+.book-table {
+  width: 80%;
+  margin: 2rem auto;
   border-collapse: collapse;
-  min-width: 500px; /* pour scroll horizontal si écran trop petit */
+  font-family: 'Quicksand', sans-serif;
+  color: #EAEAEA;
+  background: rgba(30, 30, 30, 0.85);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
 }
 
-.book-list th, .book-list td {
-  padding: 12px 15px;
-  border-bottom: 1px solid #ddd;
+.book-table th {
+  background-color: #6C63FF;
+  color: #fff;
+  font-weight: 600;
+  padding: 1rem;
   text-align: left;
 }
 
-.book-list th {
-  background-color: #4a90e2;
-  color: white;
-  position: sticky;
-  top: 0;
-  z-index: 1;
+.book-table td {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Lignes alternées et hover */
-.book-list tr:nth-child(even) {
-  background-color: #f9f9f9;
+/* Animation fade + slide */
+.fade-slide {
+  transition: all 0.4s ease;
 }
 
-.book-list tr:hover {
-  background-color: #e1f0ff;
-  transform: scale(1.01);
-  transition: 0.2s;
+.bought {
+  opacity: 0.5;
+  transform: translateX(10px);
+  text-decoration: line-through;
 }
 
-/* Total */
-.home-total {
+/* ✅ Checkbox personnalisée */
+.checkbox-container {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+.checkbox-container input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.checkmark {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.checkbox-container:hover .checkmark {
+  border-color: #FFD369;
+}
+
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #6C63FF;
+  border-color: #6C63FF;
+  box-shadow: 0 0 10px rgba(108, 99, 255, 0.6);
+}
+
+.checkmark::after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkbox-container input:checked ~ .checkmark::after {
+  display: block;
+  left: 7px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.book-table tr:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  transition: background 0.3s ease;
+}
+
+.total {
   text-align: right;
-  font-weight: bold;
-  font-size: 18px;
-  color: #4a90e2;
-  margin-top: 10px;
+  margin-right: 10%;
+  color: #FFD369;
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-top: 1rem;
 }
 
-/* Barre de recherche et tri */
-.home-controls {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  gap: 10px;
-}
 
-.home-controls input,
-.home-controls select {
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 14px;
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
